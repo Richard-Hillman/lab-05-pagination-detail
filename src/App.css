@@ -1,0 +1,16 @@
+.main{
+  background-color: cornflowerblue;
+}
+
+.nav {
+  background-color: yellow;
+}
+.header {
+  background-color: crimson;
+  padding: 20px;
+ }
+
+.pokemonMap {
+  display: flex;
+  flex-wrap: wrap;
+}
