@@ -18,10 +18,6 @@ export default class Navigation extends Component {
                     <Link to ="/Credits">CREDITS</Link>
                 </div>
 
-                <div>
-                    <Link to ="/Details">Details</Link>
-                </div>
-
             </div>
         )
     }
