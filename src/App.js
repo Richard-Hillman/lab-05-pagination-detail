@@ -29,19 +29,19 @@ import Details from './Details.js'
                   />
 
                 <Route
-                  path="/Pokedex"
+                  path="/pokedex"
                   exact
                   render={(routerProps) => <Pokedex {...routerProps} />}
                   />
 
                 <Route
-                  path="/Credits"
+                  path="/credits"
                   exact
                   render={(routerProps) => <Credits {...routerProps} />}
                   />
 
                 <Route        
-                  path="/Details"
+                  path="/details/:pokemon"
                   exact
                   render={(routerProps) => <Details {...routerProps} />}
                   />
