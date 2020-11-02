@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import Pokedex from './Pokedex.js';
 import Details from './Details.js'
+import PaginationPage from './PaginationPage.js'
 // import FetchPage from './FetchPage.js'
 
 
@@ -45,6 +46,12 @@ import Details from './Details.js'
                   exact
                   render={(routerProps) => <Details {...routerProps} />}
                   />
+
+                <Route        
+                  path="/pagination"
+                  exact
+                  render={(routerProps) => <PaginationPage {...routerProps} />}
+                />
                   
               </Switch>
             </Router>
