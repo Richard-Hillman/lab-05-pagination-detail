@@ -29,7 +29,7 @@ export default class App extends React.Component {
             count: response.body.count
         })
       } 
-
+    
     
       componentDidMount = async () => {
         this.fetchPokemon();
@@ -76,17 +76,17 @@ export default class App extends React.Component {
 
       handleIncrement = async () => {
           await this.setState({
-              pageNumber: this.state.pageNumber + 1,
+              pageNumber: this.state.pageNumber + 1
           })       
           await this.fetchPokemon()
       }
 
       handleDecrement = async () => {
         await this.setState({
-            pageNumber: this.state.pageNumber - 1,
+            pageNumber: this.state.pageNumber - 1
         })
         await this.fetchPokemon()
-    }
+      }
 
 
 // ===============================================================================================

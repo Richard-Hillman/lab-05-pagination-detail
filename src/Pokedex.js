@@ -13,25 +13,27 @@ export default class App extends React.Component {
       form:'',
       pokemonData:[],
       sortType:'attack',
-      UporDown:'asc'
+      UporDown:'asc',
+      pageNumber: 1,
+      count: 1
     }
 
     // Pokemon Grabbers ======================================================================================================
     // This is where I am getting my information from and mounting it from the api.   
-      fetchPokemon = async () => {
-        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.form}&sort=${this.state.sortType}&direction=${this.state.UporDown}`);
+    fetchPokemon = async () => {
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?page=${this.state.pageNumber}&perPage=20&pokemon=${this.state.form}&sort=${this.state.sortType}&direction=${this.state.UporDown}`);
         this.setState({ pokemonData: response.body.results });
-      } 
-    
+
+        this.setState({
+          pokemonData: response.body.results, 
+          count: response.body.count
+      })
+    } 
+
       componentDidMount = async () => {
         this.fetchPokemon();
       }
       
-      fetchClickPokemon = async () => {
-        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.form}&sort=${this.state.sortType}&direction=${this.state.UporDown}`);
-        this.setState({ pokemonData: response.body.results });
-      } 
-
         // ===================================================================================================================
 
     // THis handles the SortType
@@ -71,6 +73,22 @@ export default class App extends React.Component {
 
 // ===============================================================================================
 
+      handleIncrement = async () => {
+        await this.setState({
+            pageNumber: this.state.pageNumber + 1,
+        })       
+        await this.fetchPokemon()
+      }
+
+      handleDecrement = async () => {
+        await this.setState({
+            pageNumber: this.state.pageNumber - 1,
+        })
+        await this.fetchPokemon()
+      }
+
+// =================================================================================================
+
     render() {
      
       return (
@@ -90,6 +108,24 @@ export default class App extends React.Component {
                 />
 
               </section>
+
+              <div>{this.state.pageNumber}</div>
+
+              <div>{this.state.count}</div>
+
+              <div className="buttons">
+
+              {
+                  this.state.pageNumber !== 1 && 
+                  <button onClick={this.handleDecrement}>Previous</button>
+              } 
+
+              {
+                  this.state.pageNumber !== Math.ceil(this.state.count / 20) &&
+                  <button onClick={this.handleIncrement}>Next</button>
+              }
+
+              </div>
         {/* ================================================================ */}
 
               {/* Here is where I take the state of my pokemon Data and connect it to the pokemon mapper that will display all of my pokemon */}
@@ -107,3 +143,5 @@ export default class App extends React.Component {
         )
     }
   }
+
+
